@@ -1,30 +1,35 @@
 package daily.ex06;
 
 class letter {
+    static int a;
     public static void main(String[] args) {
-        String data = "hello world";
-
-        System.out.println(capitalize(data));
+        String output1 = letterCapitalize("hello world");
+        System.out.println(output1); // "Hello World"
+        String output2 = letterCapitalize("java  is good");
+        System.out.println(output2); // "Java  Is Good"
     }
-    private static String capitalize(String data) {
-        //문자열을 입력받아 각 단어의 첫글자를 대문자로 바꿔 리턴하라
-        //hello world
-        //Hello World
+    public static String letterCapitalize(String str) {
+        // 문자열을 입력받아
+        // 문자열을 구성하는 각 단어의 첫 글자가 대문자인 문자열을
+        // 리턴해야 합니다.
 
-        String result = "";
+        // 예외처리
+        // 연속된 공백이 존재할 수 있습니다. -> 공백제거 후 빈 문자열이면?
+        // 빈 문자(공백)으로만 이루어진 문자열을 입력받은 경우, 빈 문자열을 리턴해야 합니다.
+        if (str.trim().equals("")) return "";
 
-        String upper = data.toUpperCase();
+        String[] splitStr = str.split(" ");   // 공백 단위로 구분
 
-        result += upper.charAt(0);
+        for(int i = 0; i < splitStr.length; i++ ) {    // 공백 단위로 단어 구분
+            if(splitStr[i].equals("")) continue;;   // 빈 문자열일 때는 다음으로
 
-        for(int i = 1; i < data.length(); i++) {
-            if(data.charAt(i-1) == 32 && i != 0) {
-                result += upper.charAt(i);
-                continue;
-            }
-            result += data.charAt(i);
+            StringBuilder sb = new StringBuilder(splitStr[i]);
+            String head = String.format("%c", splitStr[i].toUpperCase().charAt(0));   // 첫글자만 뺌
+            sb.replace(0, 1, head);   // 첫글자 교체
+
+            splitStr[i] = sb.toString();
         }
 
-        return result;
+        return String.join(" ", splitStr);
     }
 }
