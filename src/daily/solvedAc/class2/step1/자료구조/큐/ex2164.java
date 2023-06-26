@@ -22,13 +22,10 @@ public class ex2164 {
         for (int i = 1; i < N + 1; i++) {
             queue.add(i);
         }
-        while (queue.size() != 0) {
-            if (queue.size() == 1) {
-                System.out.println(queue.poll());
-            }
+        for (int i = 0; 1 != queue.size(); i++) {
             queue.poll();
-            //todo
             queue.add(queue.poll());
         }
+        System.out.println(queue.poll());
     }
 }
